@@ -1,0 +1,20 @@
+.navigation-v {
+    align-items: flex-start;
+    display: inline-flex;
+    left: 20px;
+    position: relative;
+    top: 20px;
+}
+
+.navigation-v .navigation-v2 {
+    left: unset !important;
+    top: unset !important;
+}
+
+.navigation-v .navigation-instance {
+    color: var(--collection-1-color-4, #ffffff) !important;
+}
+
+.navigation-v .navigation-v-instance {
+    background-color: var(--collection-1-color-4, #ffffff) !important;
+}

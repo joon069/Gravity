@@ -1,0 +1,15 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#login-container {
+  background: white;
+  position: relative;
+}
