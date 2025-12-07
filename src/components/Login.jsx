@@ -10,6 +10,16 @@ const LoginContainer = styled.div`
   height: 858px;
 `;
 
+const LoginPageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+  background: black;
+  overflow: hidden;
+`;
+
 export default function Login() {
   useEffect(() => {
     const FixRatio = getResizeEventListener(1600, 858);
@@ -22,9 +32,11 @@ export default function Login() {
   }, []);
 
   return (
-    <LoginContainer id="login-container">
-      <LoginLeft />
-      <LoginRight />
-    </LoginContainer>
+    <LoginPageWrapper className="login-page-wrapper">
+      <LoginContainer id="login-container">
+        <LoginLeft />
+        <LoginRight />
+      </LoginContainer>
+    </LoginPageWrapper>
   )
 }
