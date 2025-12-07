@@ -185,7 +185,7 @@ export const Simulation = () => {
       <header className="top-nav">
         <div className="nav-left">
           <div className="brand">
-            <img className="brand-logo" src="/union.svg" alt="Gravity logo" />
+            <img className="brand-logo" src="/logo.svg" alt="Gravity logo" />
           </div>
         </div>
         <nav className="nav-links">
