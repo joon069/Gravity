@@ -181,6 +181,8 @@ export const Navigation = ({
   buttonClassNameOverride,
   onLoginClick,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <NavigationContainer className={className}>
       <NavigationWrapper>
@@ -190,7 +192,7 @@ export const Navigation = ({
           <MenuFrame>
             <MenuItems>
               <MenuItem>
-                <MenuText active className={divClassName}>
+                <MenuText active className={divClassName} onClick={() => navigate('/main')}>
                   Home
                 </MenuText>
               </MenuItem>
@@ -214,7 +216,11 @@ export const Navigation = ({
               </MenuItem>
 
               <MenuItem>
-                <MenuText widthPercent="77.59%" className={divClassName2}>
+                <MenuText
+                  widthPercent="77.59%"
+                  className={divClassName2}
+                  onClick={() => navigate('/simulation')}
+                >
                   SIMUL
                 </MenuText>
               </MenuItem>
