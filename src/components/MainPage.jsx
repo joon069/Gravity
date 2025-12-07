@@ -82,7 +82,7 @@ export const MainPage = () => {
     <Page>
       <HeroSection>
         <HeroHeader>
-          <Logo src="/union.svg" alt="Gravity logo" />
+          <Logo src="/logo.svg" alt="Gravity logo" />
 
           <NavList>
             {navigationItems.map((item) => (
@@ -468,7 +468,11 @@ const FeaturedGrid = styled.div`
 `;
 
 const FeaturedCard = styled.div`
-  background: linear-gradient(180deg, rgba(196, 196, 196, 1) 0%, rgba(94, 94, 94, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(196, 196, 196, 1) 0%,
+    rgba(94, 94, 94, 1) 100%
+  );
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -699,7 +703,11 @@ const ArticleCard = styled.div`
 const ArticleOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 60%);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0) 60%
+  );
 `;
 
 const ArticleContent = styled.div`
