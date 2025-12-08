@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Navigation } from "./Navigation";
 import SimulationCanvas from "./SimulationCanvas";
 import "./Simulation.css";
-
-const navLinks = ["Home", "About Us", "Services", "Article", "SIMUL"];
 
 const FieldRow = ({
   label,
@@ -172,52 +171,14 @@ export const Simulation = () => {
     }
   };
 
-  const handleNavClick = (item) => {
-    if (item === "Home") {
-      navigate("/main");
-    } else if (item === "SIMUL") {
-      navigate("/simulation");
-    }
-  };
-
   return (
     <div className="simulation-page">
-      <header className="top-nav">
-        <div className="nav-left">
-          <div className="brand">
-            <img
-              className="brand-logo"
-              src="/vector-5.svg"
-              alt="Gravity logo"
-            />
-          </div>
-        </div>
-        <nav className="nav-links">
-          {navLinks.map((item, idx) => (
-            <button
-              type="button"
-              key={item}
-              className={`nav-link ${idx === 0 ? "nav-link--active" : ""}`}
-              onClick={() => handleNavClick(item)}
-            >
-              {item}
-            </button>
-          ))}
-        </nav>
-        <div className="nav-actions">
-          <button className="lang-button" type="button">
-            <img
-              className="lang-icon"
-              src="/icon-feather-icon.svg"
-              alt="Change language"
-            />
-            <span>EN</span>
-          </button>
-          <button className="login-button" type="button">
-            Login
-          </button>
-        </div>
-      </header>
+      <Navigation
+        className="simulation-navigation"
+        activeItem="simul"
+        horizontalPadding={120}
+        onLoginClick={() => navigate("/login")}
+      />
 
       <div className="simulation-body">
         <section className="canvas-area">

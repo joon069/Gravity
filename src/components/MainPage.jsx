@@ -1,14 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
-
-const navigationItems = [
-  { label: "Home", route: "/main", active: true },
-  { label: "About Us" },
-  { label: "Services" },
-  { label: "Article" },
-  { label: "SIMUL", route: "/simulation" },
-];
+import { Navigation } from "./Navigation";
 
 const featuredArticles = [
   {
@@ -80,32 +73,15 @@ export const MainPage = () => {
 
   return (
     <Page>
+      <NavigationWrapper>
+        <Navigation
+          activeItem="home"
+          horizontalPadding={120}
+          onLoginClick={() => navigate("/login")}
+        />
+      </NavigationWrapper>
+
       <HeroSection>
-        <HeroHeader>
-          <Logo src="/logo.svg" alt="Gravity logo" />
-
-          <NavList>
-            {navigationItems.map((item) => (
-              <NavButton
-                key={item.label}
-                $active={item.active}
-                onClick={item.route ? () => navigate(item.route) : undefined}
-              >
-                {item.label}
-              </NavButton>
-            ))}
-          </NavList>
-
-          <HeaderActions>
-            <LangButton>
-              <LangIcon src="/icon-feather-icon.svg" alt="language" />
-              <LangText>EN</LangText>
-            </LangButton>
-
-            <LoginButton onClick={() => navigate("/login")}>LogIn</LoginButton>
-          </HeaderActions>
-        </HeroHeader>
-
         <HeroBody>
           <ScrollPrompt>
             <ScrollCircle>
@@ -250,102 +226,15 @@ const Page = styled.div`
   font-family: "Inter", "Poppins", sans-serif;
 `;
 
+const NavigationWrapper = styled.div`
+  background: #1a1a40;
+`;
+
 const HeroSection = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
-`;
-
-const HeroHeader = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  padding: 22px 120px;
-  background: #ffffff;
-  box-shadow: inset 0px -1px 1px #0000001a;
-  position: relative;
-  z-index: 2;
-`;
-
-const Logo = styled.img`
-  width: 30px;
-  height: 52px;
-`;
-
-const NavList = styled.nav`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 29px;
-  flex: 1;
-  min-width: 0;
-`;
-
-const NavButton = styled.button`
-  border: none;
-  background: none;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.2px;
-  font-weight: ${(props) => (props.$active ? 700 : 500)};
-  color: ${(props) => (props.$active ? "#3563e9" : "#424242")};
-  cursor: pointer;
-  padding: 6px 2px;
-  white-space: nowrap;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: #3563e9;
-  }
-`;
-
-const HeaderActions = styled.div`
-  display: inline-flex;
-  align-items: center;
-  gap: 20px;
-`;
-
-const LangButton = styled.button`
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px 8px;
-`;
-
-const LangIcon = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const LangText = styled.span`
-  font-family: "Inter", sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.2px;
-  color: #424242;
-`;
-
-const LoginButton = styled.button`
-  border: none;
-  background: #6c62d7;
-  color: #ffffff;
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.46px;
-  padding: 10px 22px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-
-  &:hover {
-    background: #5a52c7;
-  }
 `;
 
 const HeroBody = styled.div`

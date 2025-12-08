@@ -2,13 +2,32 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from '@emotion/styled';
-import unionLogo from '../assets/logo.svg';
-import featherIcon from '../assets/feather icon white.svg';
+import unionLogo from '../public/logo.svg';
+import featherIcon from '../public/feather icon white.svg';
+
+const NAV_VARIANTS = {
+  dark: {
+    textColor: '#FEF9F5',
+    accentColor: '#7164CC',
+    languageColor: '#FEF9F5',
+    loginBg: '#000',
+    loginHoverBg: '#333',
+  },
+  light: {
+    textColor: '#424242',
+    accentColor: '#7164CC',
+    languageColor: '#424242',
+    loginBg: '#6c62d7',
+    loginHoverBg: '#5a52c7',
+  },
+};
 
 const NavigationContainer = styled.div`
   align-items: flex-start;
-  display: inline-flex;
-  position: relative;
+  display: block;
+  position: ${props => (props.$isSticky ? 'sticky' : 'relative')};
+  top: ${props => (props.$isSticky ? '0' : 'auto')};
+  z-index: ${props => (props.$isSticky ? 100 : 'auto')};
   width: 100%;
 `;
 
@@ -17,7 +36,9 @@ const NavigationWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 22px 0;
+  background: ${props => props.$backgroundColor || '#fff'};
   position: relative;
+  z-index: 1;
   width: 100%;
 `;
 
@@ -26,7 +47,7 @@ const Nav = styled.div`
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   width: 100%;
-  padding: 0 40px;
+  padding: 0 ${props => props.$horizontalPadding || 40}px;
   box-sizing: border-box;
   position: relative;
 `;
@@ -66,11 +87,11 @@ const MenuItem = styled.div`
 
 const MenuText = styled.div`
   align-items: center;
-  color: ${props => props.active ? '#7164CC' : '#FEF9F5'};
+  color: ${props => props.$active ? props.$accentColor : props.$textColor};
   display: flex;
   font-family: "Inter", "Poppins", Helvetica;
   font-size: 14px;
-  font-weight: ${props => props.active ? 700 : 500};
+  font-weight: ${props => props.$active ? 700 : 500};
   height: 94.44%;
   justify-content: center;
   left: 0;
@@ -83,7 +104,7 @@ const MenuText = styled.div`
   transition: color 0.3s ease;
 
   &:hover {
-    color: #7164CC;
+    color: ${props => props.$accentColor};
   }
 `;
 
@@ -113,7 +134,7 @@ const IconWrapper = styled.div`
 
 const LanguageText = styled.div`
   align-items: center;
-  color: #FEF9F5;
+  color: ${props => props.$textColor || '#FEF9F5'};
   display: flex;
   font-family: "Inter", "Poppins", Helvetica;
   font-size: 16px;
@@ -137,7 +158,7 @@ const LoginButtonWrapper = styled.div`
 
 const LoginButton = styled.button`
   align-items: center;
-  background-color: #000;
+  background-color: ${props => props.$bgColor || '#000'};
   border-radius: 5px;
   border: none;
   box-sizing: border-box;
@@ -150,7 +171,7 @@ const LoginButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #333;
+    background-color: ${props => props.$hoverBg || '#333'};
   }
 `;
 
@@ -180,43 +201,84 @@ export const Navigation = ({
   buttonClassName,
   buttonClassNameOverride,
   onLoginClick,
+  activeItem = "home",
+  variant = "light",
+  horizontalPadding = 40,
+  backgroundColor = "#fff",
+  isSticky = true,
 }) => {
   const navigate = useNavigate();
+  const palette = NAV_VARIANTS[variant] || NAV_VARIANTS.dark;
+
+  const isActive = (item) => activeItem === item;
+  const handleLogin = () => {
+    if (onLoginClick) {
+      onLoginClick();
+      return;
+    }
+    navigate('/login');
+  };
 
   return (
-    <NavigationContainer className={className}>
-      <NavigationWrapper>
-        <Nav>
+    <NavigationContainer className={className} $isSticky={isSticky}>
+      <NavigationWrapper $backgroundColor={backgroundColor}>
+        <Nav $horizontalPadding={horizontalPadding}>
           <Logo alt="Gravity Logo" src={unionLogo} />
 
           <MenuFrame>
             <MenuItems>
               <MenuItem>
-                <MenuText active className={divClassName} onClick={() => navigate('/main')}>
+                <MenuText
+                  $active={isActive('home')}
+                  $textColor={palette.textColor}
+                  $accentColor={palette.accentColor}
+                  className={divClassName}
+                  onClick={() => navigate('/main')}
+                >
                   Home
                 </MenuText>
               </MenuItem>
 
               <MenuItem width="63px">
-                <MenuText topOffset="2.78%" widthPercent="113.79%" className={divClassNameOverride}>
+                <MenuText
+                  $active={isActive('about')}
+                  $textColor={palette.textColor}
+                  $accentColor={palette.accentColor}
+                  topOffset="2.78%"
+                  widthPercent="113.79%"
+                  className={divClassNameOverride}
+                >
                   About Us
                 </MenuText>
               </MenuItem>
 
               <MenuItem>
-                <MenuText className={homeClassName}>
+                <MenuText
+                  $active={isActive('services')}
+                  $textColor={palette.textColor}
+                  $accentColor={palette.accentColor}
+                  className={homeClassName}
+                >
                   Services
                 </MenuText>
               </MenuItem>
 
               <MenuItem>
-                <MenuText className={divClassName1}>
+                <MenuText
+                  $active={isActive('article')}
+                  $textColor={palette.textColor}
+                  $accentColor={palette.accentColor}
+                  className={divClassName1}
+                >
                   Article
                 </MenuText>
               </MenuItem>
 
               <MenuItem>
                 <MenuText
+                  $active={isActive('simul')}
+                  $textColor={palette.textColor}
+                  $accentColor={palette.accentColor}
                   widthPercent="77.59%"
                   className={divClassName2}
                   onClick={() => navigate('/simulation')}
@@ -232,11 +294,21 @@ export const Navigation = ({
               <IconWrapper>
                 <img src={featherIcon} alt="Language" style={{ width: '100%', height: '100%' }} />
               </IconWrapper>
-              <LanguageText className={enClassName}>EN</LanguageText>
+              <LanguageText
+                $textColor={palette.languageColor}
+                className={enClassName}
+              >
+                EN
+              </LanguageText>
             </Language>
 
             <LoginButtonWrapper>
-              <LoginButton className={buttonClassName} onClick={onLoginClick}>
+              <LoginButton
+                $bgColor={palette.loginBg}
+                $hoverBg={palette.loginHoverBg}
+                className={buttonClassName}
+                onClick={handleLogin}
+              >
                 <LoginButtonText className={buttonClassNameOverride}>
                   LogIn
                 </LoginButtonText>
@@ -255,4 +327,11 @@ Navigation.propTypes = {
   vector: PropTypes.string,
   img: PropTypes.string,
   vector1: PropTypes.string,
+  onLoginClick: PropTypes.func,
+  className: PropTypes.string,
+  activeItem: PropTypes.oneOf(["home", "about", "services", "article", "simul"]),
+  variant: PropTypes.oneOf(["dark", "light"]),
+  horizontalPadding: PropTypes.number,
+  backgroundColor: PropTypes.string,
+  isSticky: PropTypes.bool,
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import arrowDown from '../assets/arrow-down.svg';
+import arrowDown from '../public/arrow-down.svg';
 import "./Arrow.css";
 
 export const Arrow = ({ className }) => {

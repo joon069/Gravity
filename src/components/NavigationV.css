@@ -12,9 +12,9 @@
 }
 
 .navigation-v .navigation-instance {
-    color: var(--collection-1-color-4, #ffffff) !important;
+    color: #424242 !important;
 }
 
 .navigation-v .navigation-v-instance {
-    background-color: var(--collection-1-color-4, #ffffff) !important;
+    background-color: #6c62d7 !important;
 }
